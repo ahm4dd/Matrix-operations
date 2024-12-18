@@ -66,11 +66,13 @@ def matrixAdd():
     matrix1 = np.array(np.zeros((rows,columns)))
     matrix2 = np.array(np.zeros((rows,columns)))
     matrix3 = np.array(np.zeros((rows,columns)))
+
+    # Getting input and setting it in the right spot in the matrix
     for i in range(0, rows):
         for j in range(0, columns):
             matrix1[i][j] = float(input(f"Enter row {i+1} column {j+1} for matrix 1: "))
             matrix2[i][j] = float(input(f"Enter row {i+1} column {j+1} for matrix 2: "))
-            matrix3[i][j] = matrix1[i][j] + matrix2[i][j]
+            matrix3[i][j] = matrix1[i][j] + matrix2[i][j] # Add the row and column immediately after the user enters it
     
     print(f"Final result: {matrix3}")
     return matrix3
@@ -82,11 +84,13 @@ def matrixSub():
     matrix1 = np.array(np.zeros((rows,columns)))
     matrix2 = np.array(np.zeros((rows,columns)))
     matrix3 = np.array(np.zeros((rows,columns)))
+
+    # Getting input and setting it in the right spot in the matrix
     for i in range(0, rows):
         for j in range(0, columns):
             matrix1[i][j] = float(input(f"Enter row {i+1} column {j+1} for matrix 1: "))
             matrix2[i][j] = float(input(f"Enter row {i+1} column {j+1} for matrix 2: "))
-            matrix3[i][j] = matrix1[i][j] - matrix2[i][j]
+            matrix3[i][j] = matrix1[i][j] - matrix2[i][j] # Subtract the row and column immediately after the user enters it
     
     print(f"Final result: {matrix3}")
     return matrix3
@@ -97,20 +101,26 @@ def matrixMul():
     columns1 = int(input("Enter the number of columns matrix 1: "))
     rows2 = int(input("Enter the number of rows for matrix 2: "))
     columns2 = int(input("Enter the number of columns matrix 2: "))
+
     if(columns1 != rows2):
         print("Invalid, columns of matrix 1 must equal rows of matrix 2")
     
     matrix1 = np.array(np.zeros((rows1,columns1)))
     matrix2 = np.array(np.zeros((rows2,columns2)))
+    # Getting input and setting it in the right spot in the matrix
     for i in range(0, rows1):
         for j in range(0, columns1):
-            matrix1[i][j] = float(input(f"Enter row {i+1} column {j+1} for matrix 1: "))
-    
+            matrix1[i][j] = float(input(f"Enter row {i+1} column {j+1} for matrix 1: "))\
+            
+    # Getting input and setting it in the right spot in the matrix
     for i in range(0, rows2):
         for j in range(0, columns2):
             matrix2[i][j] = float(input(f"Enter row {i+1} column {j+1} for matrix 2: "))
+    
+    # Making a third matrix that holds the final result
     matrix3 = np.array(np.zeros((rows1,columns2)))
 
+    # Multiplying the rows of matrix 1 with the columns of matrix 2
     for i in range(0, rows1):
         for j in range(0, columns2):
             for k in range(0, columns1):
@@ -125,6 +135,8 @@ def matrixMulScalar():
     columns = int(input("Enter the number of columns: "))
     scalar = int(input("Enter the scalar: "))
     matrix1 = np.array(np.zeros((rows,columns)))
+
+    # Getting input and setting it in the right spot in the matrix
     for i in range(0, rows):
         for j in range(0, columns):
             matrix1[i][j] = float(input(f"Enter row {i+1} column {j+1}: ")) * scalar
@@ -137,10 +149,13 @@ def matrixTranspose():
     columns = int(input("Enter the number of columns: "))
     matrix1 = np.array(np.zeros((rows,columns)))
     matrix2 = np.array(np.zeros((rows,columns)))
+
+    # Getting input and setting it in the right spot in the matrix
     for i in range(0, rows):
         for j in range(0, columns):
             matrix1[i][j] = float(input(f"Enter row {i+1} column {j+1}: "))
     
+    # Swapping the rows and columns
     for i in range(0, rows):
         for j in range(0, columns):
             matrix2[i][j] = matrix1[j][i]
@@ -152,10 +167,13 @@ def matrixDeterminant():
     rows = int(input("Enter the number of rows: "))
     columns = int(input("Enter the number of columns: "))
     matrix1 = np.array(np.zeros((rows,columns)))
+
+    # Getting input and setting it in the right spot in the matrix
     for i in range(0, rows):
         for j in range(0, columns):
             matrix1[i][j] = float(input(f"Enter row {i+1} column {j+1}: "))
     
+    # Finding the determinant using NumPy
     print(f"Final result: {np.linalg.det(matrix1)}")
     return np.linalg.det(matrix1)
 
@@ -164,47 +182,48 @@ def matrixInverse():
     columns = int(input("Enter the number of columns: "))
     matrix1 = np.array(np.zeros((rows,columns)))
     cofactor = np.array(np.zeros((rows,columns)))
+
+    # Getting input and setting it in the right spot in the matrix
     for i in range(0, rows):
         for j in range(0, columns):
             matrix1[i][j] = float(input(f"Enter row {i+1} column {j+1}: "))
 
+    # Finding the minors and cofactor
     for i in range(0, rows):
         for j in range(0, columns):
             minor = np.delete(np.delete(matrix1, i, 0), j, 1)
             cofactor[i][j] = np.linalg.det(minor) * (-1) ** (i + j)
 
+    # Finding the inverse using 1/|det(A)| * adj(A)
     matrixInverse = np.transpose(cofactor) / np.linalg.det(matrix1)
     print(f"numpy result: {np.linalg.inv(matrix1)}")
     print(f"Final result: {matrixInverse}")
     return matrixInverse
 
-def matrixEigenValues():
+def matrixEigen():
     rows = int(input("Enter the number of rows: "))
     columns = int(input("Enter the number of columns: "))
     matrix1 = np.array(np.zeros((rows,columns)))
-    for i in range(0, rows):
-        for j in range(0, columns):
-            matrix1[i][j] = float(input(f"Enter row {i+1} column {j+1}: "))
-    
-    print(f"Final result: {np.linalg.eig(matrix1)}")
-    return np.linalg.eig(matrix1)
 
-def matrixEigenVectors():
-    rows = int(input("Enter the number of rows: "))
-    columns = int(input("Enter the number of columns: "))
-    matrix1 = np.array(np.zeros((rows,columns)))
+    # Getting input and setting it in the right spot in the matrix
     for i in range(0, rows):
         for j in range(0, columns):
             matrix1[i][j] = float(input(f"Enter row {i+1} column {j+1}: "))
     
-    print(f"Final result: {np.linalg.eig(matrix1)}")
+    # Using NumPy to find the eigenvalues (w) and the corresponding eigenvectors (v)
+    w, v = np.linalg.eig(matrix1)
+
+    print("Eigenvalues: ", w)
+    print("Eigenvectors: ", v)
+
     return np.linalg.eig(matrix1)
 
 def main():
-    option = int(input("Enter 0.Solve linear equations 1.Matrix addition 2.Matrix subtraction 3.Matrix multiplication\n4.Matrix multiplication scalar 5.Matrix transpose 6.Matrix determinant 7.Matrix inverse\n8.Matrix eigen values 9.Matrix eigen vectors: "))
+    option = int(input("Enter 0.Solve linear equations 1.Matrix addition 2.Matrix subtraction 3.Matrix multiplication\n4.Matrix multiplication scalar 5.Matrix transpose 6.Matrix determinant 7.Matrix inverse\n8.Matrix eigen: "))
 
     match (option):
         case 0:
+            # Either use Gauss Jordan or Cramer Rule
             option2 = int(input("Enter 1.Gauss Jordan 2.Cramer Rule: "))
             equations = int(input("Enter number of equations: "))
             variables = int(input("Enter number of variables: "))
@@ -233,10 +252,7 @@ def main():
         case 7:
             matrixInverse()
         case 8:
-            matrixEigenValues()
-        case 9:
-            matrixEigenVectors()
+            matrixEigen()
         case _:
             print("Invalid option")
-
 main()
