@@ -216,7 +216,7 @@ def matrixEigen():
     print("Eigenvalues: ", w)
     print("Eigenvectors: ", v)
 
-    return np.linalg.eig(matrix1)
+    return w,v
 
 def main():
     option = int(input("Enter 0.Solve linear equations 1.Matrix addition 2.Matrix subtraction 3.Matrix multiplication\n4.Matrix multiplication scalar 5.Matrix transpose 6.Matrix determinant 7.Matrix inverse\n8.Matrix eigen: "))
