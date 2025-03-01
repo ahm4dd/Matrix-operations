@@ -1,6 +1,6 @@
 # Program
 
-> **The main purpose of this program is to apply all the Linear Algebra concepts we have learned in Tishk International University, Computer Engineering, 2nd grade so far.**
+> **The main purpose of this program is to apply all the Linear Algebra concepts we have learned at Tishk International University, Computer Engineering, 2nd grade so far.**
 
 ## Workflow
 
